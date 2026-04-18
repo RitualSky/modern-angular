@@ -1,0 +1,41 @@
+<div class="panel-header" (click)="$event.stopPropagation()">
+  <span class="panel-title">Notificaciones</span>
+  @if (notificationService.unreadCount() > 0) {
+    <button mat-button color="primary" (click)="onMarkAllRead($event)">
+      Marcar todas como leídas
+    </button>
+  }
+</div>
+
+<mat-divider></mat-divider>
+
+@if (notificationService.notifications().length === 0) {
+  <div class="empty-state">
+    <mat-icon>notifications_none</mat-icon>
+    <p>Sin notificaciones</p>
+  </div>
+} @else {
+  <div class="notifications-list">
+    @for (notif of notificationService.notifications(); track notif.id) {
+      <div
+        class="notification-item"
+        [ngClass]="['type-' + notif.type, notif.read ? 'is-read' : 'is-unread']"
+        (click)="onNotificationClick(notif.id, $event)">
+        <div class="notif-indicator"></div>
+        <div class="notif-body">
+          <span class="notif-title">{{ notif.title }}</span>
+          <span class="notif-message">{{ notif.message }}</span>
+          <span class="notif-time">{{ notif.createdAt | date:'short' }}</span>
+        </div>
+        <button
+          mat-icon-button
+          class="remove-btn"
+          matTooltip="Eliminar"
+          (click)="onRemove(notif.id, $event)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <mat-divider></mat-divider>
+    }
+  </div>
+}

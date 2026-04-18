@@ -1,0 +1,58 @@
+<div class="page-container">
+  <h1 class="page-title">Dashboard</h1>
+
+  <div class="cards-grid">
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>check_circle</mat-icon> Scaffolding listo
+        </mat-card-title>
+        <mat-card-subtitle>Angular 17 + Material</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Layout empresarial con sidebar responsive, navbar y sistema de notificaciones configurado.</p>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-button color="primary" (click)="addTestNotification()">
+          <mat-icon>add_alert</mat-icon> Probar notificación
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>http</mat-icon> API Service
+        </mat-card-title>
+        <mat-card-subtitle>HttpClient + Interceptores</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Auth interceptor y error interceptor configurados. <code>ApiService</code> listo para consumir endpoints.</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>security</mat-icon> Auth Guard
+        </mat-card-title>
+        <mat-card-subtitle>Rutas protegidas</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Guard listo para proteger rutas. Activa <code>canActivate: [authGuard]</code> en <code>app.routes.ts</code>.</p>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>notifications</mat-icon> Notificaciones
+        </mat-card-title>
+        <mat-card-subtitle>Angular Signals</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Sistema reactivo basado en <code>signal()</code> y <code>computed()</code> para notificaciones en tiempo real.</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+<div class="page-container">
+  <div class="page-header">
+    <button mat-icon-button routerLink="/customers" matTooltip="Volver a la lista">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="page-title">Detalle del cliente</h1>
+    <div class="header-actions">
+      <button mat-stroked-button color="warn" (click)="onDelete()">
+        <mat-icon>delete</mat-icon> Eliminar
+      </button>
+      <button mat-raised-button color="primary" [routerLink]="['/customers', customerId, 'edit']">
+        <mat-icon>edit</mat-icon> Editar
+      </button>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="loading-wrapper">
+      <mat-spinner diameter="48"></mat-spinner>
+    </div>
+  }
+
+  @if (customer(); as c) {
+    <div class="detail-grid">
+      <mat-card appearance="outlined" class="info-card">
+        <mat-card-header>
+          <div class="avatar-placeholder" mat-card-avatar>
+            {{ c.name.charAt(0).toUpperCase() }}
+          </div>
+          <mat-card-title>{{ c.name }}</mat-card-title>
+          <mat-card-subtitle>{{ c.company }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <mat-divider></mat-divider>
+
+          <div class="info-list">
+            <div class="info-row">
+              <mat-icon>email</mat-icon>
+              <div class="info-content">
+                <span class="info-label">Email</span>
+                <span class="info-value">{{ c.email }}</span>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <mat-icon>phone</mat-icon>
+              <div class="info-content">
+                <span class="info-label">Teléfono</span>
+                <span class="info-value">{{ c.phone }}</span>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <mat-icon>business</mat-icon>
+              <div class="info-content">
+                <span class="info-label">Empresa</span>
+                <span class="info-value">{{ c.company }}</span>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <mat-icon>circle</mat-icon>
+              <div class="info-content">
+                <span class="info-label">Estado</span>
+                <span class="status-badge" [ngClass]="'status-' + c.status">
+                  {{ c.status === 'active' ? 'Activo' : 'Inactivo' }}
+                </span>
+              </div>
+            </div>
+
+            <div class="info-row">
+              <mat-icon>calendar_today</mat-icon>
+              <div class="info-content">
+                <span class="info-label">Fecha de registro</span>
+                <span class="info-value">{{ c.createdAt | date:'dd/MM/yyyy' }}</span>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  }
+</div>

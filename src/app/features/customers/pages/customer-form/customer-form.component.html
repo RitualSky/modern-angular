@@ -1,0 +1,89 @@
+<div class="page-container">
+  <div class="page-header">
+    <button mat-icon-button routerLink="/customers" matTooltip="Cancelar y volver">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="page-title">{{ title }}</h1>
+  </div>
+
+  @if (loading()) {
+    <div class="loading-wrapper">
+      <mat-spinner diameter="48"></mat-spinner>
+    </div>
+  } @else {
+    <mat-card appearance="outlined" class="form-card">
+      <mat-card-content>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="form-grid">
+
+            <mat-form-field appearance="outline" class="col-span-2">
+              <mat-label>Nombre completo</mat-label>
+              <mat-icon matPrefix>person</mat-icon>
+              <input matInput formControlName="name" placeholder="Ej: Ana García">
+              @if (form.get('name')?.touched && form.get('name')?.hasError('required')) {
+                <mat-error>El nombre es requerido</mat-error>
+              }
+              @if (form.get('name')?.touched && form.get('name')?.hasError('minlength')) {
+                <mat-error>Mínimo 2 caracteres</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Correo electrónico</mat-label>
+              <mat-icon matPrefix>email</mat-icon>
+              <input matInput formControlName="email" type="email" placeholder="ana@empresa.com">
+              @if (form.get('email')?.touched && form.get('email')?.hasError('required')) {
+                <mat-error>El email es requerido</mat-error>
+              }
+              @if (form.get('email')?.touched && form.get('email')?.hasError('email')) {
+                <mat-error>Email inválido</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Teléfono</mat-label>
+              <mat-icon matPrefix>phone</mat-icon>
+              <input matInput formControlName="phone" placeholder="+51 987 654 321">
+              @if (form.get('phone')?.touched && form.get('phone')?.hasError('required')) {
+                <mat-error>El teléfono es requerido</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Empresa</mat-label>
+              <mat-icon matPrefix>business</mat-icon>
+              <input matInput formControlName="company" placeholder="Ej: Tech Solutions S.A.">
+              @if (form.get('company')?.touched && form.get('company')?.hasError('required')) {
+                <mat-error>La empresa es requerida</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Estado</mat-label>
+              <mat-icon matPrefix>toggle_on</mat-icon>
+              <mat-select formControlName="status">
+                <mat-option value="active">Activo</mat-option>
+                <mat-option value="inactive">Inactivo</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+
+          <div class="form-actions">
+            <button mat-stroked-button type="button" routerLink="/customers">
+              Cancelar
+            </button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="saving()">
+              @if (saving()) {
+                <mat-spinner diameter="20"></mat-spinner>
+              } @else {
+                <mat-icon>save</mat-icon>
+              }
+              {{ submitLabel }}
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

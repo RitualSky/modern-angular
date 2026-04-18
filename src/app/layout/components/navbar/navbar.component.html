@@ -1,0 +1,39 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="toggleSidenav.emit()" aria-label="Toggle sidebar">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span class="toolbar-title">AngularDemo</span>
+
+  <span class="spacer"></span>
+
+  <!-- Notifications -->
+  <button mat-icon-button [matMenuTriggerFor]="notifMenu" aria-label="Notificaciones">
+    <mat-icon
+      [matBadge]="notificationService.unreadCount()"
+      [matBadgeHidden]="notificationService.unreadCount() === 0"
+      matBadgeColor="warn"
+      matBadgeSize="small">
+      notifications
+    </mat-icon>
+  </button>
+  <mat-menu #notifMenu="matMenu" xPosition="before" class="notification-menu">
+    <app-notification-panel></app-notification-panel>
+  </mat-menu>
+
+  <!-- User menu -->
+  <button mat-icon-button [matMenuTriggerFor]="userMenu" aria-label="Usuario">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <mat-menu #userMenu="matMenu" xPosition="before">
+    <button mat-menu-item>
+      <mat-icon>person</mat-icon>
+      <span>Mi perfil</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item>
+      <mat-icon>logout</mat-icon>
+      <span>Cerrar sesión</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
